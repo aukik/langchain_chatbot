@@ -2,7 +2,7 @@ from urllib import response
 import streamlit as st
 import requests
 from assistant import chat_generator
-st.title("💬 Chatbot")
+st.title("💬 Smartgrad")
 
 hide_st_style = """
             <style>
