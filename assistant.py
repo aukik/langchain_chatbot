@@ -195,3 +195,12 @@ def getContext(query):
 
 
     return str(docs)
+
+
+def AiSummary(context):
+    prompt = ChatPromptTemplate.from_template("Summarize the whole information given in HTML format: \n {context}")
+    output_parser = StrOutputParser()
+
+    chain = prompt | model | output_parser
+
+    return {"context" :chain.invoke({"context": context}) }
