@@ -95,7 +95,8 @@ def generator(question):
 
     return chunk
 
-def chat_generator(messages):
+def chat_generator(new_message):
+    messages=new_message[1:]
     last_question=messages[-1]["content"]
     context=getContext(str(messages))
     template = f"""

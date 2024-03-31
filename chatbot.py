@@ -29,7 +29,7 @@ if prompt := st.chat_input():
 
     # msg = response.choices[0].message.content
     # print(st.session_state.messages)
-    st.session_state.messages.pop(0)
+
     msg=chat_generator(st.session_state.messages)
     # msg="gg"
     print(type({"messages":st.session_state.messages}))
