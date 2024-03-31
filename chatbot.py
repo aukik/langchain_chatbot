@@ -15,7 +15,7 @@ st.title("Smartgrad")
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "How can i help you?"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hello there! How can I help you today?"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
