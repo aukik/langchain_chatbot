@@ -2,8 +2,9 @@ from urllib import response
 import streamlit as st
 import requests
 from assistant import chat_generator
-st.title("💬 Smartgrad")
-
+import streamlit.components.v1 as components
+st.title("Smartgrad")
+# components.html("<p style='background-color:black;'>Smartgrad</p>")
 #hide_st_style = """
  #           <style>
   #          MainMenu {visibility: hidden;}
@@ -14,7 +15,7 @@ st.title("💬 Smartgrad")
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = []
+    st.session_state["messages"] = [{"role": "assistant", "content": "How can i help you?"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
@@ -28,6 +29,7 @@ if prompt := st.chat_input():
 
     # msg = response.choices[0].message.content
     # print(st.session_state.messages)
+    st.session_state.messages.pop(0)
     msg=chat_generator(st.session_state.messages)
     # msg="gg"
     print(type({"messages":st.session_state.messages}))
