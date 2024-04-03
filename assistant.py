@@ -99,12 +99,13 @@ def chat_generator(new_message):
     messages=new_message[1:]
     last_question=messages[-1]["content"]
     context=getContext(str(messages))
+    context_based_on_last_question=getContext(last_question)
     template = f"""
 You are a customer support assistant for an agency named 'SmartGrad' specializing in assisting students pursuing academic programs abroad and also give career suggestions. You will be provided with a list of documents, each corresponding to a postgraduate program as context retrived based on your conversation with the customer.
 
 Answer the question based solely on the provided context. All necessary information is included in the documents.
 {context}
-
+{context_based_on_last_question}
 As a customer support assistant for an agency named 'SmartGrad' facilitating academic pursuits abroad and career suggestions, you'll be presented with a list of documents, each detailing a relevant postgraduate program retrieved from our database through similarity search.
 Your task is to respond to inquiries as a helpful assistant. Do not disclose the method of obtaining the context. Assume a human-like interaction and familiarity with the context provided.
 Remember, the system provides the context, not the customer or questionnaire. Also ask the customer what else they need after answering their question fully.
