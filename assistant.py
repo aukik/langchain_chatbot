@@ -100,36 +100,35 @@ def chat_generator(new_message):
     last_question=messages[-1]["content"]
     context=getContext(str(messages))
     template = f"""
-   <s>[INST]
-You are a customer support assistant for an agency named 'SmartGrad' specializing in assisting students pursuing academic programs abroad. You will be provided with a list of documents, each corresponding to a postgraduate program.
-[/INST]
-[INST]
+You are a customer support assistant for an agency named 'SmartGrad' specializing in assisting students pursuing academic programs abroad and also give career suggestions. You will be provided with a list of documents, each corresponding to a postgraduate program as context retrived based on your conversation with the customer.
+
 Answer the question based solely on the provided context. All necessary information is included in the documents.
 {context}
-[/INST]
-[INST]
-As a customer support assistant for an agency named 'SmartGrad' facilitating academic pursuits abroad, you'll be presented with a list of documents, each detailing a relevant postgraduate program retrieved from our database through similarity search.
+
+As a customer support assistant for an agency named 'SmartGrad' facilitating academic pursuits abroad and career suggestions, you'll be presented with a list of documents, each detailing a relevant postgraduate program retrieved from our database through similarity search.
 Your task is to respond to inquiries as a helpful assistant. Do not disclose the method of obtaining the context. Assume a human-like interaction and familiarity with the context provided.
-Remember, the system provides the context, not the customer or questionnaire. Also ask the customer what else they need after answering their question.
+Remember, the system provides the context, not the customer or questionnaire. Also ask the customer what else they need after answering their question fully.
 ASK MORE QUESTIONS BEFORE GIVING THE FINAL VERDICT OR ANSWER. MAKE IT LIKE A CONVERSATION. AFTER YOU GET ENOUGH CONTEXT GIVE AN ANSWER.
 DO NOT MENTION THE WORDS 'CONTEXT' OR 'DOCUMENTs' IN YOUR ANSWER and DONOT USE COMPLEX MARKDOWN.
-[/INST]
-[INST]
-Question: {last_question}
-[/INST]</s>
+List Of Previous conversation with the customer:
+{str(messages)}
+
+Last Question: {last_question}
+
 Your Answer as a Human Customer Service:
     """
-    messages_new = []
+    # messages_new = []
 
-    messages_new.append(SystemMessage(content="You are a customer support assistant for an agency specializing in assisting students pursuing academic programs abroad. You will be provided with a list of documents, each corresponding to a postgraduate program.Answer the question based solely on the provided context. "))
-    for message in messages:
-        if(message["role"]=="user"):
-            messages_new+=[HumanMessage(content=message["content"])]
-        else:
+    # messages_new.append(SystemMessage(content="You are a customer support assistant for an agency specializing in assisting students pursuing academic programs abroad. You will be provided with a list of documents, each corresponding to a postgraduate program.Answer the question based solely on the provided context. "))
+    # for message in messages:
+    #     if(message["role"]=="user"):
+    #         messages_new+=[HumanMessage(content=message["content"])]
+    #     else:
 
-            messages_new+=[AIMessage(content=message["content"])]
-    messages_new.pop(len(messages_new)-1)
-    messages_new+=[HumanMessage(content=template)]
+    #         messages_new+=[AIMessage(content=message["content"])]
+    # messages_new.pop(len(messages_new)-1)
+    # messages_new+=[HumanMessage(content=template)]
+    messages_new=[HumanMessage(content=template)]
     #print messages_new line by line
     # for message in messages_new:
     #     print(message,"\n")
